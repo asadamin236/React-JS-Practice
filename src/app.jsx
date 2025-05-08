@@ -1,3 +1,4 @@
+// App.jsx
 import "./app.css";
 import About from "./screens/About";
 import Contact from "./screens/Contact";
@@ -6,9 +7,8 @@ import Register2 from "./screens/Register2";
 import UserList from "./screens/UserList";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./store/Reducer";
 import { store } from "./store/store";
+import { CountProvider } from "./context/CountContext"; // ✅ added this
 
 const Router = createBrowserRouter([
   {
@@ -27,6 +27,10 @@ const Router = createBrowserRouter([
     path: "/user-list",
     element: <UserList />,
   },
+  {
+    path: "/contact",
+    element: <Contact />, // ✅ Contact page through router
+  },
 ]);
 
 export function App() {
@@ -34,14 +38,13 @@ export function App() {
     <>
       <div>
         <Provider store={store}>
-          <h1>Hello World</h1>
-          {/* <Register /> */}
-          {/* <Contact /> */}
-          {/* <UserList /> */}
-          {/* <RouterProvider router={Register2} /> */}
-          <RouterProvider router={Router} />
-          <Contact />
-          {/* <Register2 /> */}
+          <CountProvider>
+            {" "}
+            {/* ✅ Context provider added here */}
+            <h1>Hello World</h1>
+            {/* <Contact /> ✅ Removed direct render */}
+            <RouterProvider router={Router} />
+          </CountProvider>
         </Provider>
       </div>
     </>

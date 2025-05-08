@@ -1,17 +1,14 @@
-import React, {createContext, usestate} from "react"
+import React, { createContext, useState } from "react";
 
-const CountContext = createContext()
+const CountContext = createContext();
 
-function CountProvider({children}) {
-  const [countDetails, setCountDetails] = usestate({
-    userName: "Asad Amin",
-  })
-
+function CountProvider({ children }) {
+  const [count, setCount] = useState(0);
   return (
-    <CountContext.Provider value={countDetails}>
+    <CountContext.Provider value={{ count, setCount }}>
       {children}
     </CountContext.Provider>
-  )
+  );
 }
 
-export {CountProvider, userContext}
+export { CountProvider, CountContext };
